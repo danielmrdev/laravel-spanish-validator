@@ -1,6 +1,11 @@
 # Changelog
 
-All notable changes to `laravel-spanish-identity-validator` will be documented in this file
+All notable changes to `laravel-spanish-identity-validator` will be documented in this file.
+
+## 1.4.5 - 2025-08-27
+
+- Upgrade to support Laravel 12. (Thanks to Laravel Shift).
+  
 
 ## 1.4.0 - 2024-08-24
 
