@@ -1,6 +1,6 @@
 <?php
 
-namespace Orumad\SpanishValidator;
+namespace Danielmrdev\SpanishValidator;
 
 class InternalValidator
 {

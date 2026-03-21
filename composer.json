@@ -2,14 +2,17 @@
     "name": "danielmrdev/laravel-spanish-validator",
     "description": "Laravel validator for spanish stuff: NIF, NIE, CIF, NSS, IBAN, Postal Code, Phone numbers",
     "keywords": [
-        "orumad",
         "laravel validation rules",
         "laravel",
         "laravel package",
-        "laravel validator"
+        "laravel validator",
+        "spanish validator",
+        "nif",
+        "nie",
+        "cif"
     ],
     "homepage": "https://github.com/danielmrdev/laravel-spanish-validator",
-    "version": "1.4.5",
+    "version": "2.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -26,17 +29,16 @@
     },
     "require-dev": {
         "orchestra/testbench": "^9.0|^10.0",
-        "phpunit/phpunit": "^11.0",
-        "scrutinizer/ocular": "master-dev"
+        "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
-            "Orumad\\SpanishValidator\\": "src"
+            "Danielmrdev\\SpanishValidator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Orumad\\SpanishValidator\\Tests\\": "tests"
+            "Danielmrdev\\SpanishValidator\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,10 +51,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orumad\\SpanishValidator\\SpanishValidatorServiceProvider"
+                "Danielmrdev\\SpanishValidator\\SpanishValidatorServiceProvider"
             ],
             "aliases": {
-                "SpanishValidator": "Orumad\\SpanishValidator\\Facades\\SpanishValidator"
+                "SpanishValidator": "Danielmrdev\\SpanishValidator\\Facades\\SpanishValidator"
             }
         }
     }

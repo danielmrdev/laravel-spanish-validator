@@ -1,8 +1,8 @@
 <?php
 
-namespace Orumad\SpanishValidator\Tests;
+namespace Danielmrdev\SpanishValidator\Tests;
 
-use Orumad\SpanishValidator\Validator;
+use Danielmrdev\SpanishValidator\Validator;
 
 class SpanishValidatorTest extends \PHPUnit\Framework\TestCase
 {
