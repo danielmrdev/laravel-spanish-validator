@@ -51,6 +51,10 @@ class SpanishValidatorTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValidNie('Z1361012'));
         $this->assertFalse($this->validator->isValidNie('Z1361012-Z'));
         $this->assertFalse($this->validator->isValidNie(null));
+        // K, L, M are special NIF prefixes (BOE-A-1990-6394), not valid NIE prefixes
+        $this->assertFalse($this->validator->isValidNie('K1234567L'));
+        $this->assertFalse($this->validator->isValidNie('L1234567X'));
+        $this->assertFalse($this->validator->isValidNie('M1234567Z'));
     }
 
     /** @test */

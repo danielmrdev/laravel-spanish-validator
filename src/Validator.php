@@ -41,7 +41,7 @@ class Validator
     public function isValidNie(?string $value): bool
     {
         if ($value) {
-            $regEx = '/^[KLMXYZ][0-9]{7}[A-Z]$/i';
+            $regEx = '/^[XYZ][0-9]{7}[A-Z]$/i';
             $letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
             $value = strtoupper($value);
