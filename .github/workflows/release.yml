@@ -60,8 +60,13 @@ jobs:
 
       - name: Create GitHub Release
         run: |
-          gh release create v${{ steps.tag_version.outputs.version }} \
-            --title "Release v${{ steps.tag_version.outputs.version }}" \
-            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+          VERSION="v${{ steps.tag_version.outputs.version }}"
+          TITLE="Release v${{ steps.tag_version.outputs.version }}"
+          NOTES="See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
+          if gh release view "$VERSION" &>/dev/null; then
+            gh release edit "$VERSION" --title "$TITLE" --notes "$NOTES" --draft=false
+          else
+            gh release create "$VERSION" --title "$TITLE" --notes "$NOTES"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
