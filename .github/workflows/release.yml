@@ -46,23 +46,8 @@ jobs:
         run: |
           VERSION="${{ steps.tag_version.outputs.version }}"
           DATE=$(date +"%Y-%m-%d")
-
-          # Create new changelog entry
-          NEW_ENTRY="## [$VERSION] - $DATE
-
-### Added
--
-
-### Changed
--
-
-### Fixed
--
-
-"
-
-          # Insert after the header
-          sed -i "4i\\$NEW_ENTRY" CHANGELOG.md
+          printf "## [%s] - %s\n\n### Added\n-\n\n### Changed\n-\n\n### Fixed\n-\n\n" "$VERSION" "$DATE" > /tmp/changelog_entry.md
+          sed -i "3r /tmp/changelog_entry.md" CHANGELOG.md
 
       - name: Commit changes
         run: |
