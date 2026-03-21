@@ -123,7 +123,7 @@ Composer will detect the tag and publish the new version automatically.
 - Instantiates `Validator` class in constructor
 - Each method signature: `public function validate{Rule}($attribute, $value, $parameters, $validator): bool`
 - Delegates to corresponding method on `Validator` instance (e.g., `validateNif()` → `$this->validator->isValidNif()`)
-- Called via string reference in ServiceProvider: `'Orumad\\SpanishValidator\\InternalValidator@validateNif'`
+- Called via string reference in ServiceProvider: `'Danielmrdev\\SpanishValidator\\InternalValidator@validateNif'`
 
 ### Layer 3: Core Validator (`src/Validator.php`)
 
@@ -146,13 +146,13 @@ Composer will detect the tag and publish the new version automatically.
 
 - Extends Laravel's `Facade` base class
 - Returns `'Validator'` as the IoC binding (the Laravel validator instance)
-- Allows usage like `\Orumad\SpanishValidator\Facades\SpanishValidator::validate()`
+- Allows usage like `\Danielmrdev\SpanishValidator\Facades\SpanishValidator::validate()`
 
 ### Translation Files (`resources/lang/`)
 
 - **`es/spanishValidator.php`**: Spanish error messages for each validation rule
 - **`en/spanishValidator.php`**: English error messages
-- During development, use config command to publish these: `php artisan vendor:publish --provider="Orumad\SpanishValidator\SpanishValidatorServiceProvider"`
+- During development, use config command to publish these: `php artisan vendor:publish --provider="Danielmrdev\SpanishValidator\SpanishValidatorServiceProvider"`
 - Keys are used in `ServiceProvider::replacer()` callbacks
 
 ---
@@ -185,7 +185,7 @@ Composer will detect the tag and publish the new version automatically.
 1. Add validation logic to `Validator` class: `public function isValid{RuleName}(?string $value): bool`
 2. Add corresponding test cases in `SpanishValidatorTest`
 3. Register the rule in `SpanishValidatorServiceProvider::addValidators()`:
-   - Call `Validator::extend('rule_name', 'Orumad\\SpanishValidator\\InternalValidator@validate{RuleName}')`
+   - Call `Validator::extend('rule_name', 'Danielmrdev\\SpanishValidator\\InternalValidator@validate{RuleName}')`
    - Call `Validator::replacer('rule_name', function(...) { return __('spanishValidator::spanishValidator.rule_name'); })`
 4. Create `InternalValidator` method if needed: `public function validate{RuleName}($attribute, $value, $parameters, $validator)`
 5. Add translation keys to `resources/lang/es/spanishValidator.php` and `resources/lang/en/spanishValidator.php`

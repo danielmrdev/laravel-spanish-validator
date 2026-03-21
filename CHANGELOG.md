@@ -20,7 +20,7 @@ All notable changes to `laravel-spanish-validator` will be documented in this fi
 ## 1.4.0 - 2024-08-24
 
 - Upgrade to Laravel 11. (Thanks to @rubenmdh)
-- Fix [issue #4](https://github.com/orumad/laravel-spanish-validator/issues/4).
+- Fix [issue #4](https://github.com/danielmrdev/laravel-spanish-validator/issues/4).
 - Fix "lang" resource publishing.
 - Fix other lang files issues.
 - Added version number to composer.json.
@@ -29,7 +29,7 @@ All notable changes to `laravel-spanish-validator` will be documented in this fi
 ## 1.3.0 - 2023-04-12
 
 - Upgrade to Laravel 10 and PHP 8.2.
-- Fix [issue #5](https://github.com/orumad/laravel-spanish-validator/issues/5).
+- Fix [issue #5](https://github.com/danielmrdev/laravel-spanish-validator/issues/5).
 - Fix tests and added code coverage.
 
 
