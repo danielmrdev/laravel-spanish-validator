@@ -111,7 +111,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Security
 
-If you discover any security related issues, please email dev@danielmunoz.io instead of using the issue tracker.
+If you discover any security related issues, please email hello@danielmr.dev instead of using the issue tracker.
 
 ## License
 
