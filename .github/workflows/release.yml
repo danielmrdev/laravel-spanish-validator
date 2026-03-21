@@ -1,0 +1,86 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Extract version from tag
+        id: tag_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update composer.json version
+        run: |
+          php -r "
+          \$file = 'composer.json';
+          \$data = json_decode(file_get_contents(\$file), true);
+          \$data['version'] = '${{ steps.tag_version.outputs.version }}';
+          file_put_contents(\$file, json_encode(\$data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL);
+          "
+
+      - name: Update CHANGELOG.md
+        run: |
+          VERSION="${{ steps.tag_version.outputs.version }}"
+          DATE=$(date +"%Y-%m-%d")
+
+          # Create new changelog entry
+          NEW_ENTRY="## [$VERSION] - $DATE
+
+### Added
+-
+
+### Changed
+-
+
+### Fixed
+-
+
+"
+
+          # Insert after the header
+          sed -i "4i\\$NEW_ENTRY" CHANGELOG.md
+
+      - name: Commit changes
+        run: |
+          git add composer.json CHANGELOG.md
+          git commit -m "chore: release v${{ steps.tag_version.outputs.version }}" || true
+
+      - name: Push changes
+        run: |
+          git push origin main || true
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.tag_version.outputs.version }}
+          release_name: Release v${{ steps.tag_version.outputs.version }}
+          body: |
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false

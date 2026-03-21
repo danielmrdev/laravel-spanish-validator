@@ -2,14 +2,17 @@
     "name": "danielmrdev/laravel-spanish-validator",
     "description": "Laravel validator for spanish stuff: NIF, NIE, CIF, NSS, IBAN, Postal Code, Phone numbers",
     "keywords": [
-        "orumad",
         "laravel validation rules",
         "laravel",
         "laravel package",
-        "laravel validator"
+        "laravel validator",
+        "spanish validator",
+        "nif",
+        "nie",
+        "cif"
     ],
     "homepage": "https://github.com/danielmrdev/laravel-spanish-validator",
-    "version": "1.4.5",
+    "version": "2.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -22,26 +25,25 @@
     "require": {
         "php": "^8.2",
         "globalcitizen/php-iban": "^4.2.3",
-        "illuminate/support": "^11.0|^12.0"
+        "illuminate/support": "^11.0|^12.0|^13.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0|^10.0",
-        "phpunit/phpunit": "^11.0",
-        "scrutinizer/ocular": "master-dev"
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.0"
     },
     "autoload": {
         "psr-4": {
-            "Orumad\\SpanishValidator\\": "src"
+            "Danielmrdev\\SpanishValidator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Orumad\\SpanishValidator\\Tests\\": "tests"
+            "Danielmrdev\\SpanishValidator\\Tests\\": "tests"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test-coverage": "vendor/bin/phpunit --coverage-html build/coverage --coverage-clover build/logs/clover.xml --coverage-text=build/coverage.txt"
     },
     "config": {
         "sort-packages": true
@@ -49,10 +51,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orumad\\SpanishValidator\\SpanishValidatorServiceProvider"
+                "Danielmrdev\\SpanishValidator\\SpanishValidatorServiceProvider"
             ],
             "aliases": {
-                "SpanishValidator": "Orumad\\SpanishValidator\\Facades\\SpanishValidator"
+                "SpanishValidator": "Danielmrdev\\SpanishValidator\\Facades\\SpanishValidator"
             }
         }
     }

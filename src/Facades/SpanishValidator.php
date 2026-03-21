@@ -1,6 +1,6 @@
 <?php
 
-namespace Orumad\SpanishValidator\Facades;
+namespace Danielmrdev\SpanishValidator\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

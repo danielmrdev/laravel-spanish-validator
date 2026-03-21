@@ -1,6 +1,6 @@
 <?php
 
-namespace Orumad\SpanishValidator;
+namespace Danielmrdev\SpanishValidator;
 
 class InternalValidator
 {
@@ -54,5 +54,10 @@ class InternalValidator
     public function validatePhone($attribute, $value, $parameters, $validator)
     {
         return $this->validator->isValidPhone($value);
+    }
+
+    public function validateSpecialNif($attribute, $value, $parameters, $validator)
+    {
+        return $this->validator->isValidSpecialNif($value);
     }
 }

@@ -1,0 +1,49 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-source
+
+      - name: Run PHPUnit with coverage
+        run: vendor/bin/phpunit --coverage-clover coverage.xml --coverage-html coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      - name: Check code style (PSR-2)
+        run: |
+          if ! command -v phpcs &> /dev/null; then
+            composer require --dev squizlabs/php_codesniffer
+          fi
+          vendor/bin/phpcs --standard=PSR2 src/ || true
+
+      - name: Check code standards
+        run: |
+          if ! command -v phpstan &> /dev/null; then
+            composer require --dev phpstan/phpstan
+          fi
+          vendor/bin/phpstan analyse src/ --level=5 || true

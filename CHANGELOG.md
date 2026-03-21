@@ -1,6 +1,16 @@
 # Changelog
 
-All notable changes to `laravel-spanish-identity-validator` will be documented in this file.
+All notable changes to `laravel-spanish-validator` will be documented in this file.
+
+## 2.0.0 - 2026-03-21
+
+### Changed
+- **BREAKING**: Changed package namespace from `Orumad\SpanishValidator` to `Danielmrdev\SpanishValidator`
+- **BREAKING**: Updated package name from `orumad/laravel-spanish-validator` to `danielmrdev/laravel-spanish-validator`
+- Migrated from Travis CI and Scrutinizer to GitHub Actions for CI/CD
+- Updated GitHub Actions workflows with automated testing and release process
+- Updated all documentation and references to new namespace
+- See [Migration Guide](#migration-from-v1) in README for upgrade instructions
 
 ## 1.4.5 - 2025-08-27
 
@@ -10,7 +20,7 @@ All notable changes to `laravel-spanish-identity-validator` will be documented i
 ## 1.4.0 - 2024-08-24
 
 - Upgrade to Laravel 11. (Thanks to @rubenmdh)
-- Fix [issue #4](https://github.com/orumad/laravel-spanish-validator/issues/4).
+- Fix [issue #4](https://github.com/danielmrdev/laravel-spanish-validator/issues/4).
 - Fix "lang" resource publishing.
 - Fix other lang files issues.
 - Added version number to composer.json.
@@ -19,7 +29,7 @@ All notable changes to `laravel-spanish-identity-validator` will be documented i
 ## 1.3.0 - 2023-04-12
 
 - Upgrade to Laravel 10 and PHP 8.2.
-- Fix [issue #5](https://github.com/orumad/laravel-spanish-validator/issues/5).
+- Fix [issue #5](https://github.com/danielmrdev/laravel-spanish-validator/issues/5).
 - Fix tests and added code coverage.
 
 

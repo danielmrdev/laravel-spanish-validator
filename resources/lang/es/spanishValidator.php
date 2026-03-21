@@ -10,4 +10,5 @@ return [
     'iban' => 'El IBAN introducido no es válido.',
     'spanish_postal_code' => 'El código postal no es válido.',
     'spanish_phone' => 'No es un número de teléfono válido.',
+    'spanish_special_nif' => 'El NIF especial introducido no es válido.',
 ];

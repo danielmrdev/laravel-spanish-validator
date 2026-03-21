@@ -1,6 +1,6 @@
 <?php
 
-namespace Orumad\SpanishValidator;
+namespace Danielmrdev\SpanishValidator;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
@@ -45,57 +45,63 @@ class SpanishValidatorServiceProvider extends ServiceProvider
     private function addValidators()
     {
         // Tax Number: NIF or NIE or CIF
-        Validator::extend('spanish_tax_number', 'Orumad\\SpanishValidator\\InternalValidator@validateTaxNumber');
+        Validator::extend('spanish_tax_number', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateTaxNumber');
         Validator::replacer('spanish_tax_number', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.spanish_tax_number');
         });
 
         // Personal ID: NIF or NIE
-        Validator::extend('spanish_personal_id', 'Orumad\\SpanishValidator\\InternalValidator@validatePersonalId');
+        Validator::extend('spanish_personal_id', 'Danielmrdev\\SpanishValidator\\InternalValidator@validatePersonalId');
         Validator::replacer('spanish_personal_id', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.spanish_personal_id');
         });
 
         // NIF
-        Validator::extend('nif', 'Orumad\\SpanishValidator\\InternalValidator@validateNif');
+        Validator::extend('nif', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateNif');
         Validator::replacer('nif', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.nif');
         });
 
         // NIE
-        Validator::extend('nie', 'Orumad\\SpanishValidator\\InternalValidator@validateNie');
+        Validator::extend('nie', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateNie');
         Validator::replacer('nie', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.nie');
         });
 
         // CIF
-        Validator::extend('cif', 'Orumad\\SpanishValidator\\InternalValidator@validateCif');
+        Validator::extend('cif', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateCif');
         Validator::replacer('cif', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.cif');
         });
 
         // NSS
-        Validator::extend('nss', 'Orumad\\SpanishValidator\\InternalValidator@validateNss');
+        Validator::extend('nss', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateNss');
         Validator::replacer('nss', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.nss');
         });
 
         // IBAN
-        Validator::extend('iban', 'Orumad\\SpanishValidator\\InternalValidator@validateIban');
+        Validator::extend('iban', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateIban');
         Validator::replacer('iban', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.iban');
         });
 
         // Postal Code
-        Validator::extend('spanish_postal_code', 'Orumad\\SpanishValidator\\InternalValidator@validatePostalCode');
+        Validator::extend('spanish_postal_code', 'Danielmrdev\\SpanishValidator\\InternalValidator@validatePostalCode');
         Validator::replacer('spanish_postal_code', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.spanish_postal_code');
         });
 
         // Phone
-        Validator::extend('spanish_phone', 'Orumad\\SpanishValidator\\InternalValidator@validatePhone');
+        Validator::extend('spanish_phone', 'Danielmrdev\\SpanishValidator\\InternalValidator@validatePhone');
         Validator::replacer('spanish_phone', function ($message, $attribute, $rule, $parameters) {
             return __('spanishValidator::spanishValidator.spanish_phone');
+        });
+
+        // Special NIF (K, L, M)
+        Validator::extend('spanish_special_nif', 'Danielmrdev\\SpanishValidator\\InternalValidator@validateSpecialNif');
+        Validator::replacer('spanish_special_nif', function ($message, $attribute, $rule, $parameters) {
+            return __('spanishValidator::spanishValidator.spanish_special_nif');
         });
     }
 }

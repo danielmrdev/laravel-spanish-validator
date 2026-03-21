@@ -1,9 +1,9 @@
 # Laravel validator for spanish stuff: NIF, NIE, CIF, NSS, IBAN, Postal Code, Phone numbers
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/orumad/laravel-spanish-validator.svg?style=flat-square)](https://packagist.org/packages/orumad/laravel-spanish-validator)
-[![StyleCI](https://github.styleci.io/repos/184770182/shield?branch=main)](https://github.styleci.io/repos/184770182)
-[![Quality Score](https://img.shields.io/scrutinizer/g/orumad/laravel-spanish-validator.svg?style=flat-square)](https://scrutinizer-ci.com/g/orumad/laravel-spanish-validator)
-[![Total Downloads](https://img.shields.io/packagist/dt/orumad/laravel-spanish-validator.svg?style=flat-square)](https://packagist.org/packages/orumad/laravel-spanish-validator)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/danielmrdev/laravel-spanish-validator.svg?style=flat-square)](https://packagist.org/packages/danielmrdev/laravel-spanish-validator)
+[![Tests](https://github.com/danielmrdev/laravel-spanish-validator/actions/workflows/tests.yml/badge.svg)](https://github.com/danielmrdev/laravel-spanish-validator/actions)
+[![Code Quality](https://github.com/danielmrdev/laravel-spanish-validator/actions/workflows/quality.yml/badge.svg)](https://github.com/danielmrdev/laravel-spanish-validator/actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/danielmrdev/laravel-spanish-validator.svg?style=flat-square)](https://packagist.org/packages/danielmrdev/laravel-spanish-validator)
 
 This package is a set of diferent validation rules for spanish national id numbers like:
 
@@ -19,12 +19,12 @@ Also the package include validators for:
 - **Phone number**: Spanish phone numbers format.
 
 
-## Instalation
+## Installation
 
 The package can be installed via composer:
 
 ```bash
-composer require orumad/laravel-spanish-validator
+composer require danielmrdev/laravel-spanish-validator
 ```
 
 The package will automatically register itself.
@@ -32,8 +32,32 @@ The package will automatically register itself.
 If you want to edit the validation messages, you should run the following command to publish the translation files into your `resources/lang` folder:
 
 ```bash
-php artisan vendor:publish --provider="Orumad\SpanishValidator\SpanishValidatorServiceProvider"
+php artisan vendor:publish --provider="Danielmrdev\SpanishValidator\SpanishValidatorServiceProvider"
 ```
+
+### Migration from v1 (orumad/laravel-spanish-validator)
+
+**v2.0.0 is a major version with breaking changes:**
+
+1. **Package name**: `orumad/laravel-spanish-validator` → `danielmrdev/laravel-spanish-validator`
+2. **Namespace**: `Orumad\SpanishValidator` → `Danielmrdev\SpanishValidator`
+
+**To upgrade:**
+
+```bash
+# Update composer.json
+composer require danielmrdev/laravel-spanish-validator:^2.0
+
+# Update your code imports
+# Old: use Orumad\SpanishValidator\Validator;
+# New: use Danielmrdev\SpanishValidator\Validator;
+
+# Update Laravel service provider references if custom published
+# Old: Orumad\SpanishValidator\SpanishValidatorServiceProvider
+# New: Danielmrdev\SpanishValidator\SpanishValidatorServiceProvider
+```
+
+The validation rules remain the same, only the namespace has changed.
 
 
 ## Available rules
@@ -111,7 +135,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Security
 
-If you discover any security related issues, please email dev@danielmunoz.io instead of using the issue tracker.
+If you discover any security related issues, please email hello@danielmr.dev instead of using the issue tracker.
 
 ## License
 
