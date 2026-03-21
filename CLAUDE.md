@@ -62,20 +62,26 @@ composer update
 - PHPStan static analysis (level 5)
 
 **Release** (`.github/workflows/release.yml`)
-- Manual trigger via GitHub Actions tab
-- Input: version number (semantic versioning: X.Y.Z)
+- Triggers automatically on git tag push (pattern: `v*`)
 - Automatically:
-  1. Updates `composer.json` version
-  2. Updates `CHANGELOG.md` with new entry
-  3. Creates commit
-  4. Creates git tag
-  5. Pushes to GitHub
-  6. Creates GitHub Release page
+  1. Extracts version from tag (e.g., `v1.4.6` → `1.4.6`)
+  2. Updates `composer.json` version
+  3. Updates `CHANGELOG.md` with new entry template
+  4. Commits changes to main
+  5. Creates GitHub Release page
+- Composer automatically detects the new tag and updates Packagist within 15 minutes
 
 **How to release:**
-1. Go to Actions tab → Release workflow
-2. Click "Run workflow" → Enter version (e.g., `1.4.6`)
-3. Composer automatically detects the new tag and updates Packagist
+```bash
+# 1. Bump version in composer.json manually (or prepare via commit)
+# 2. Create and push the tag
+git tag v1.4.6
+git push origin v1.4.6
+# 3. Workflow runs automatically
+# 4. Check GitHub Releases page for the release
+```
+
+Composer will detect the tag and publish the new version automatically.
 
 ---
 

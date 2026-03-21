@@ -1,12 +1,9 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (e.g., 1.4.6)'
-        required: true
-        type: string
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   release:
@@ -24,30 +21,30 @@ jobs:
         with:
           php-version: 8.2
 
+      - name: Extract version from tag
+        id: tag_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Validate version format
-        run: |
-          if ! [[ ${{ github.event.inputs.version }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "Invalid version format. Use semantic versioning (e.g., 1.4.6)"
-            exit 1
-          fi
 
       - name: Update composer.json version
         run: |
           php -r "
           \$file = 'composer.json';
           \$data = json_decode(file_get_contents(\$file), true);
-          \$data['version'] = '${{ github.event.inputs.version }}';
+          \$data['version'] = '${{ steps.tag_version.outputs.version }}';
           file_put_contents(\$file, json_encode(\$data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL);
           "
 
       - name: Update CHANGELOG.md
         run: |
-          VERSION="${{ github.event.inputs.version }}"
+          VERSION="${{ steps.tag_version.outputs.version }}"
           DATE=$(date +"%Y-%m-%d")
 
           # Create new changelog entry
@@ -70,24 +67,19 @@ jobs:
       - name: Commit changes
         run: |
           git add composer.json CHANGELOG.md
-          git commit -m "chore: release v${{ github.event.inputs.version }}"
+          git commit -m "chore: release v${{ steps.tag_version.outputs.version }}" || true
 
-      - name: Create tag
+      - name: Push changes
         run: |
-          git tag v${{ github.event.inputs.version }}
-
-      - name: Push changes and tag
-        run: |
-          git push origin main
-          git push origin v${{ github.event.inputs.version }}
+          git push origin main || true
 
       - name: Create GitHub Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.event.inputs.version }}
-          release_name: Release v${{ github.event.inputs.version }}
+          tag_name: v${{ steps.tag_version.outputs.version }}
+          release_name: Release v${{ steps.tag_version.outputs.version }}
           body: |
             See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
           draft: false
