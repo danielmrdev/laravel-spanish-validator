@@ -14,10 +14,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Telecom**: Spanish phone numbers
 
 **Package Details:**
-- Namespace: `Orumad\SpanishValidator`
+- Namespace: `Danielmrdev\SpanishValidator` (v2.0.0+)
+- Previous namespace: `Orumad\SpanishValidator` (v1.x)
 - PHP: ^8.2
 - Laravel: ^11.0 | ^12.0
 - Package Manager: Composer
+- Current version: 2.0.0 (major rewrite with breaking changes)
+
+---
+
+## Important Notes
+
+### v2.0.0 Breaking Changes (2026-03-21)
+
+**This is a major version with breaking changes.** See README.md for migration guide.
+
+- ✅ Namespace changed: `Orumad\SpanishValidator` → `Danielmrdev\SpanishValidator`
+- ✅ Package name: `orumad/laravel-spanish-validator` → `danielmrdev/laravel-spanish-validator`
+- ✅ All validation logic unchanged — only namespace/package refactor
+- ✅ Migrated to GitHub Actions for CI/CD
+
+Users on v1.x should update:
+1. `composer require danielmrdev/laravel-spanish-validator:^2.0`
+2. Update imports: `Orumad\SpanishValidator` → `Danielmrdev\SpanishValidator`
+3. See README.md "Migration from v1" section for details
 
 ---
 
