@@ -196,4 +196,26 @@ class SpanishValidatorTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->validator->isValidPhone(' 856471476 '));
         $this->assertFalse($this->validator->isValidPhone(null));
     }
+
+    /** @test */
+    public function is_a_valid_special_nif()
+    {
+        $this->assertTrue($this->validator->isValidSpecialNif('K0000000T'));
+        $this->assertTrue($this->validator->isValidSpecialNif('K0000001R'));
+        $this->assertTrue($this->validator->isValidSpecialNif('L0000000T'));
+        $this->assertTrue($this->validator->isValidSpecialNif('L0000001R'));
+        $this->assertTrue($this->validator->isValidSpecialNif('M0000000T'));
+        $this->assertTrue($this->validator->isValidSpecialNif('M0000001R'));
+    }
+
+    /** @test */
+    public function is_not_a_valid_special_nif()
+    {
+        $this->assertFalse($this->validator->isValidSpecialNif('K0000000A'));
+        $this->assertFalse($this->validator->isValidSpecialNif('L0000001A'));
+        $this->assertFalse($this->validator->isValidSpecialNif('M0000000Z'));
+        $this->assertFalse($this->validator->isValidSpecialNif('X5487441D'));
+        $this->assertFalse($this->validator->isValidSpecialNif('12345678Z'));
+        $this->assertFalse($this->validator->isValidSpecialNif(null));
+    }
 }

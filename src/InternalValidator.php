@@ -55,4 +55,9 @@ class InternalValidator
     {
         return $this->validator->isValidPhone($value);
     }
+
+    public function validateSpecialNif($attribute, $value, $parameters, $validator)
+    {
+        return $this->validator->isValidSpecialNif($value);
+    }
 }

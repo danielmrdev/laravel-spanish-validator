@@ -102,6 +102,24 @@ class Validator
         return false;
     }
 
+    public function isValidSpecialNif(?string $value): bool
+    {
+        if ($value) {
+            $regEx = '/^[KLM][0-9]{7}[A-Z]$/i';
+            $letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+            $value = strtoupper($value);
+
+            if (preg_match($regEx, $value)) {
+                $replaced = str_replace(['K', 'L', 'M'], ['0', '0', '0'], $value);
+
+                return $letters[substr($replaced, 0, 8) % 23] == $value[8];
+            }
+        }
+
+        return false;
+    }
+
     public function isValidNSS(?string $value): bool
     {
         if ($value) {
