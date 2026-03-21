@@ -74,13 +74,9 @@ jobs:
           git push origin main || true
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
+        run: |
+          gh release create v${{ steps.tag_version.outputs.version }} \
+            --title "Release v${{ steps.tag_version.outputs.version }}" \
+            --notes "See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details."
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.tag_version.outputs.version }}
-          release_name: Release v${{ steps.tag_version.outputs.version }}
-          body: |
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
-          draft: false
-          prerelease: false
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
